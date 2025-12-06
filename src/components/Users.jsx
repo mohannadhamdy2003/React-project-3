@@ -8,76 +8,55 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
-  },
-];
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export function TableDemo() {
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/user/show")
+      .then((res) => res.json())
+      .then((data) => setUsers(data));
+  }, [users]);
+  async function deleteUser(id){
+    await axios.delete(`http://127.0.0.1:8000/api/user/delete/${id}`)
+  }
+
+  // console.log(user);
+  // console.log(user); // will print the data after fetch
+
   return (
     <Table className=" ">
       {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
       <TableHeader className="">
-        <TableRow >
+        <TableRow>
           <TableHead className="text-center">Id</TableHead>
           <TableHead className="text-center">Users</TableHead>
           <TableHead className="text-center">Email</TableHead>
+          <TableHead className="text-center">A</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableRow>
-          <TableCell className="font-medium">1</TableCell>
-          <TableCell>ahmed</TableCell>
-          <TableCell>Ahmed@gmail.com</TableCell>
-        </TableRow>
+        {users.map((user, index) => {
+          return (
+            <TableRow key={index}>
+              <TableCell className="font-medium">{user.id}</TableCell>
+              <TableCell>{user.name}</TableCell>
+              <TableCell>{user.email}</TableCell>
+              <TableCell>
+                <Link to={`${user.id}`}>
+                  <i className="fa-regular fa-pen-to-square text-blue-400 cursor-pointer "></i>
+                </Link>
+                <i
+                  className="fa-solid fa-trash text-red-600 mx-9 cursor-pointer"
+                  onClick={() => deleteUser(user.id)}
+                ></i>
+              </TableCell>
+            </TableRow>
+          );
+        })}
       </TableBody>
-      {/* <TableFooter>
-        <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
-        </TableRow>
-      </TableFooter> */}
     </Table>
   );
 }

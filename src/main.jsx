@@ -13,10 +13,10 @@ import Header from "../src/components/Header";
 
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  // <StrictMode>
     <BrowserRouter>
       {/* <Header /> */}
       <App />
     </BrowserRouter>
-  </StrictMode>
+  // </StrictMode>
 );

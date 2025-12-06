@@ -6,6 +6,7 @@ import Home from "./Home";
 import Dashboard from "./Dashboard";
 import './App.css'
 import React from "react"
+import { TableDemo } from "./components/Users";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -16,7 +17,9 @@ function App() {
         <Route path="/register" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="users" element={<TableDemo />} />
+        </Route>
       </Routes>
     </div>
   );
