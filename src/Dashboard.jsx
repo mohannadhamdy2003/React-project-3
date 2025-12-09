@@ -31,30 +31,23 @@ import { Outlet, Route, Routes } from "react-router-dom";
 
 export default function Dashboard() {
   return (
-    <div
-      className="
-      grid-template-columns: 240px 1fr 1fr;
-      grid-template-areas: 
-        's h h'
-        's d d'
-        's d d';
-      grid-template-rows: 720px 150px 150px; 
+    <div className="grid grid-cols-[240px_1fr] grid-rows-[60px_1fr] h-screen">
       
-    "
-    >
-      {/* Topbar */}
-      <div className="area-h">
+      {/* TopBar */}
+      <header className="col-span-2 row-start-1 row-end-2 border-b bg-white">
         <TopBar />
-      </div>
-      {/* Sidebar */}
-      <div className=" area-s hidden md:block bg-white border-r p-4">
-        <SideBar />
-      </div>
+      </header>
 
-      {/* Content */}
-      <div className="area-s">
-        <TableDemo />
-      </div>
+      {/* Sidebar */}
+      <aside className="row-span-2 row-start-1 bg-white border-r hidden md:block">
+        <SideBar />
+      </aside>
+
+      {/* Content (Outlet renders here) */}
+      <main className="col-start-1 col-span-2 row-start-2 p-4 overflow-auto">
+        <Outlet />
+      </main>
+
     </div>
   );
 }

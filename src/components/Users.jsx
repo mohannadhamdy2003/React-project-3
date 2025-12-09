@@ -13,18 +13,19 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export function TableDemo() {
-  const [users, setUsers] = useState([]);
+  const[users,setUsers]=useState([])
+  const[flag,setFlag]=useState()
+  //get all users : "http://127.0.0.1:8000/api/user/show"
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/user/show")
       .then((res) => res.json())
       .then((data) => setUsers(data));
-  }, [users]);
+  }, [flag]);
+  // delete fuunction : `http://127.0.0.1:8000/api/user/delete/`
   async function deleteUser(id){
-    await axios.delete(`http://127.0.0.1:8000/api/user/delete/${id}`)
+    await axios.delete(`http://127.0.0.1:8000/api/user/delete/${id}`);
+    setFlag(true)
   }
-
-  // console.log(user);
-  // console.log(user); // will print the data after fetch
 
   return (
     <Table className=" ">
@@ -38,10 +39,10 @@ export function TableDemo() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {users.map((user, index) => {
-          return (
-            <TableRow key={index}>
-              <TableCell className="font-medium">{user.id}</TableCell>
+            {users.map((user,index)=>{
+              return(
+           <TableRow key={index}>
+              <TableCell className="font-medium">{index + 1}</TableCell>
               <TableCell>{user.name}</TableCell>
               <TableCell>{user.email}</TableCell>
               <TableCell>
@@ -53,9 +54,10 @@ export function TableDemo() {
                   onClick={() => deleteUser(user.id)}
                 ></i>
               </TableCell>
-            </TableRow>
-          );
-        })}
+            </TableRow>)
+            })}
+          
+         
       </TableBody>
     </Table>
   );
