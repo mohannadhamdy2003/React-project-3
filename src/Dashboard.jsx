@@ -34,7 +34,7 @@ export default function Dashboard() {
     <div className="grid grid-cols-[240px_1fr] grid-rows-[60px_1fr] h-screen">
       
       {/* TopBar */}
-      <header className="col-span-2 row-start-1 row-end-2 border-b bg-white">
+      <header className="col-span-2 r/ow-start-1 row-end-2 lg:border-b bg-white">
         <TopBar />
       </header>
 

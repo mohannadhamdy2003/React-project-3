@@ -2,7 +2,7 @@
 import {Link} from "react-router-dom"
 export default function SideBar() {
   return (
-    <nav className=" hidden xl:block sm:hidden bg-white shadow-md border-r border-gray-200   h-screen fixed  left-0 w-[150px] py-6 px-4 mr-10 ">
+    <nav className=" hidden   lg:w-[150px] 2xl:block  bg-white shadow-md border-r border-gray-200   h-screen fixed  left-0  py-6 px-4  ">
       <div className="mt-4 -ml-10">
         <ul className="mt-2 space-y-4 ">
           <li>
@@ -13,6 +13,10 @@ export default function SideBar() {
           <li>
             <Link to="/dashboard/users" className="nav-link text-black">
               Users{" "}
+            </Link>
+            <Link to="/dashboard/users/create" 
+            className="nav-link text-black text">
+              New Users{" "}
             </Link>
           </li>
         </ul>
