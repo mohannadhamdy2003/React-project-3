@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import Header from "./components/Header";
-import InfoForm from "./components/Form/InfoForm";
+import Header from "../../../components/Header";
+import InfoForm from "../../../components/Form/InfoForm";
 
 export default function SingUp() {
   // const [flag, setFlag] = useState(true);
@@ -11,7 +11,7 @@ export default function SingUp() {
       <Header />
 
       <div className="mainDiv">
-        <InfoForm button="Register" action="register" />
+        <InfoForm button="Register" endpoint="register" />
       </div>
     </>
   );

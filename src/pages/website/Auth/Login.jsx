@@ -1,40 +1,38 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
-import Header  from "./components/Header";
+import Header from "../../../components/Header";
+import { User } from "../context/Usercontext";
 export default function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [accept, setAccept] = useState(false);
-
+  // const [accept, setAccept] = useState(false);
+  const usernow = useContext(User);
+  console.log(usernow);
   async function submit(e) {
     e.preventDefault();
     setAccept(true);
-    //   const flag
-    //    const flag =
-    //       password.length >= 8 ;
 
-    //    if (!flag) return;
-
-    //send data
     try {
-      let res=await axios
-        .post("http://127.0.0.1:8000/api/login", {
-          email: email,
-          password: password,
-        })
-        // console.log(res.status)
-        if(res.status>=200&& res.status<=300){
-          window.localStorage.setItem("Email",email)
-          window.location.pathname="/"
-          // window.location.pathname = "/login";
-        }
-    } catch (e) {
-      // setEmailError(e.response.status);
-    }
+      let res = await axios.post("http://127.0.0.1:8000/api/login", {
+        email: email,
+        password: password,
+      });
+
+      if (res.status >= 200 && res.status <= 300) {
+        // window.localStorage.setItem("Email", email);
+        // const token = res.data.data.token;
+        // const userdetail = res.data.data.user;
+        // console.log(token);
+        // console.log(userdetail);
+        // usernow.setAuth({ token, userdetail });
+        // window.location.pathname = "/";
+        
+      }
+    } catch (e) {}
   }
   return (
     <>
-    <Header />
+      <Header />
       <div className="mainDiv">
         <form className="signUp" onSubmit={submit}>
           <label htmlFor="email">Email:</label>

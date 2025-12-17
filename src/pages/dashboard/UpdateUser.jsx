@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Form, useParams } from "react-router-dom";
-import InfoForm from "./components/Form/InfoForm";
+import InfoForm from "../../components/Form/InfoForm";
 const UpdateUser = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -18,7 +18,12 @@ const UpdateUser = () => {
   return (
     <div className="mainDiv">
       <h1>Update User</h1>
-      <InfoForm button="Update" name={name} email={email} action="update" />
+      <InfoForm
+        button="Update"
+        name={name}
+        email={email}
+        endpoint={`user/update/${id}`}
+      />
     </div>
   );
 };
